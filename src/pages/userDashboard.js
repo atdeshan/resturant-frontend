@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const SERVER_URL = 'http://localhost:5001'; // Change to your backend URL
+const SERVER_URL = 'https://restaurant-backend-production-4e8c.up.railway.app';
 
 const sampleMenu = [
   { id: 1, name: 'Fried Rice', price: 350 },

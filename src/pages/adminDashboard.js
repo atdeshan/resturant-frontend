@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { io } from 'socket.io-client';
 
-const SERVER_URL = 'http://localhost:5001'; // adjust for production
+const SERVER_URL = 'https://restaurant-backend-production-4e8c.up.railway.app';
 
 function AdminDashboard() {
   const [token, setToken] = useState('');
