@@ -8,13 +8,13 @@ function App() {
     <Router>
       <div style={{ padding: 20 }}>
         <nav style={{ marginBottom: 20 }}>
-          <Link to="/" style={{ marginRight: 10 }}>Customer Order</Link>
-          <Link to="/admin">Admin Dashboard</Link>
+          <Link to="/resturant-frontend" style={{ marginRight: 10 }}>Customer Order</Link>
+          <Link to="/resturant-frontend/admin">Admin Dashboard</Link>
         </nav>
 
         <Routes>
-          <Route path="/" element={<CustomerOrder />} />
-          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/resturant-frontend" element={<CustomerOrder />} />
+          <Route path="/resturant-frontend/admin" element={<AdminDashboard />} />
         </Routes>
       </div>
     </Router>
