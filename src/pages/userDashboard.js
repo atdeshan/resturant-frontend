@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 
 const SERVER_URL = 'https://restaurant-backend-production-4e8c.up.railway.app';
@@ -18,6 +19,13 @@ function CustomerOrder() {
   const [submitting, setSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
 
+    useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tableFromURL = params.get('table');
+    if (tableFromURL) {
+      setTableNumber(tableFromURL);
+    }
+  }, []);
   // Handle quantity change
   const updateQuantity = (id, qty) => {
     setItems(items.map(item => item.id === id ? { ...item, quantity: qty } : item));
