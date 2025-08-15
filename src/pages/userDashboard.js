@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
+import chicken from '../images/chi.jpg'; // Adjust the path as necessary
+import rice from '../images/rice.jpg'; // Adjust the path as necessary
+import coke from '../images/coke.jpg'; // Adjust the path as necessary
+import vegi from '../images/vegi.jpg'; // Adjust the path as necessary
 
 const SERVER_URL = 'https://restaurant-backend-production-4e8c.up.railway.app';
 
 const sampleMenu = [
-  { id: 1, name: 'Fried Rice', price: 350 },
-  { id: 2, name: 'Chicken Curry', price: 450 },
-  { id: 3, name: 'Coke', price: 120 },
-  { id: 4, name: 'Vegetable Salad', price: 200 },
+  { id: 1, name: 'Fried Rice', price: 350,image:rice },
+  { id: 2, name: 'Chicken Curry', price: 450,image:chicken },
+  { id: 3, name: 'Coke', price: 120, image:coke },
+  { id: 4, name: 'Vegetable Salad', price: 200, image:vegi },
 ];
 
 function CustomerOrder() {
@@ -102,6 +106,7 @@ function CustomerOrder() {
         {items.map(item => (
           <div key={item.id} style={{ marginBottom: 10, borderBottom: '1px solid #ddd', paddingBottom: 8 }}>
             <strong>{item.name} (Rs. {item.price})</strong><br />
+            <img src={item.image} alt={item.name} style={{ width: '30%', height: '50%', borderRadius: 4 }} /><br />
             Quantity: <input
               type="number"
               min="0"
