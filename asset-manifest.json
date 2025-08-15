@@ -1,15 +1,19 @@
 {
   "files": {
     "main.css": "/resturant-frontend/static/css/main.e6c13ad2.css",
-    "main.js": "/resturant-frontend/static/js/main.2af92964.js",
+    "main.js": "/resturant-frontend/static/js/main.4442ff28.js",
     "static/js/453.670e15c7.chunk.js": "/resturant-frontend/static/js/453.670e15c7.chunk.js",
+    "static/media/rice.jpg": "/resturant-frontend/static/media/rice.2421eabe1a9cd6402736.jpg",
+    "static/media/coke.jpg": "/resturant-frontend/static/media/coke.a6db42bd425cc58aa731.jpg",
+    "static/media/chi.jpg": "/resturant-frontend/static/media/chi.87e6cac4fc436102ae84.jpg",
+    "static/media/vegi.jpg": "/resturant-frontend/static/media/vegi.034d0c05140a5f9765cc.jpg",
     "index.html": "/resturant-frontend/index.html",
     "main.e6c13ad2.css.map": "/resturant-frontend/static/css/main.e6c13ad2.css.map",
-    "main.2af92964.js.map": "/resturant-frontend/static/js/main.2af92964.js.map",
+    "main.4442ff28.js.map": "/resturant-frontend/static/js/main.4442ff28.js.map",
     "453.670e15c7.chunk.js.map": "/resturant-frontend/static/js/453.670e15c7.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.2af92964.js"
+    "static/js/main.4442ff28.js"
   ]
 }
