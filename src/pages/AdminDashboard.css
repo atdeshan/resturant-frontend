@@ -1,0 +1,147 @@
+/* ===== MAIN CONTAINER ===== */
+.admin-container {
+  max-width: 900px;
+  margin: auto;
+  margin-top: 30px;
+  padding: 25px;
+  background-color: #000; /* black theme */
+  color: #fff; /* white text */
+  font-family: 'Poppins', sans-serif;
+  border-radius: 12px;
+  border: 1px solid #333;
+}
+
+/* ===== HEADINGS ===== */
+.admin-container h2 {
+  text-align: center;
+  font-size: 38px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+/* ===== LOGIN FORM ===== */
+.login-form {
+  max-width: 40vw;
+  margin: auto;
+  margin-top: 100px;
+  padding: 25px;
+  background-color: #111;
+  border-radius: 12px;
+  border: 1px solid #333;
+  text-align: center;
+  
+  
+}
+
+.login-form input {
+  width: 90%;
+  padding: 10px 12px;
+  margin-bottom: 36px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #111;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s ease;
+  
+  
+}
+
+.login-form input:focus {
+  border-color: #fff;
+  box-shadow: 0 0 5px #fff;
+}
+
+.login-form button {
+  width: 50%;
+  padding: 12px;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.login-form button:hover {
+  background: #ddd;
+}
+
+.login-form p {
+  color: red;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+/* ===== TABLE STYLING ===== */
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.orders-table th,
+.orders-table td {
+  padding: 12px 8px;
+  border: 1px solid #444;
+  text-align: left;
+}
+
+.orders-table th {
+  background-color: #111;
+  color: #fff;
+}
+
+.orders-table tr:nth-child(even) {
+  background-color: #111;
+}
+
+.orders-table tr:nth-child(odd) {
+  background-color: #1a1a1a;
+}
+
+/* ===== STATUS BUTTONS ===== */
+.status-btn {
+  margin-right: 6px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+.status-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.status-btn:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+/* Example color coding for statuses */
+.status-btn.Pending { background-color: #ffa500; color: #000; }
+.status-btn.Preparing { background-color: #00bfff; color: #000; }
+.status-btn.Ready { background-color: #32cd32; color: #000; }
+.status-btn.Served { background-color: #4b0082; color: #fff; }
+.status-btn.Cancelled { background-color: #ff4500; color: #fff; }
+
+/* ===== LOGOUT BUTTON ===== */
+.logout-btn {
+  margin-top: 20px;
+  padding: 10px 16px;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  width: 30%;
+}
+
+.logout-btn:hover {
+  background: #ddd;
+}

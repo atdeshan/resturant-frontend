@@ -5,19 +5,23 @@ import AdminDashboard from './pages/adminDashboard';
 
 function App() {
   return (
-    <Router>
-      <div style={{ padding: 20 }}>
-        <nav style={{ marginBottom: 20 }}>
-          <Link to="/resturant-frontend" style={{ marginRight: 10 }}>Customer Order</Link>
-          <Link to="/resturant-frontend/admin">Admin Dashboard</Link>
-        </nav>
+    <div>
+  <Router>
+    <div className="nav-container">
+      <nav className="navbar">
+        <Link to="/resturant-frontend" className="nav-link">Customer Order</Link>
+        <Link to="/resturant-frontend/admin" className="nav-link">Admin Dashboard</Link>
+      </nav>
 
-        <Routes>
-          <Route path="/resturant-frontend" element={<CustomerOrder />} />
-          <Route path="/resturant-frontend/admin" element={<AdminDashboard />} />
-        </Routes>
-      </div>
-    </Router>
+      <Routes>
+        <Route path="/resturant-frontend" element={<CustomerOrder />} />
+        <Route path="/resturant-frontend/admin" element={<AdminDashboard />} />
+      </Routes>
+    </div>
+  </Router>
+</div>
+
+    
   );
 }
 

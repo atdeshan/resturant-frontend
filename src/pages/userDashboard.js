@@ -1,66 +1,69 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import axios from 'axios';
-import chicken from '../images/chi.jpg'; // Adjust the path as necessary
-import rice from '../images/rice.jpg'; // Adjust the path as necessary
-import coke from '../images/coke.jpg'; // Adjust the path as necessary
-import vegi from '../images/vegi.jpg'; // Adjust the path as necessary
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import chicken from "../images/chi.jpg";
+import rice from "../images/rice.jpg";
+import coke from "../images/coke.jpg";
+import vegi from "../images/vegi.jpg";
+import "./CustomerOrder.css"; // ⬅️ IMPORT CSS FILE
 
-const SERVER_URL = 'https://restaurant-backend-production-4e8c.up.railway.app';
+const SERVER_URL = "https://restaurant-backend-production-4e8c.up.railway.app";
 
 const sampleMenu = [
-  { id: 1, name: 'Fried Rice', price: 350,image:rice },
-  { id: 2, name: 'Chicken Curry', price: 450,image:chicken },
-  { id: 3, name: 'Coke', price: 120, image:coke },
-  { id: 4, name: 'Vegetable Salad', price: 200, image:vegi },
+  { id: 1, name: "Fried Rice", price: 350, image: rice },
+  { id: 2, name: "Chicken Curry", price: 450, image: chicken },
+  { id: 3, name: "Coke", price: 120, image: coke },
+  { id: 4, name: "Vegetable Salad", price: 200, image: vegi },
 ];
 
 function CustomerOrder() {
-  const [tableNumber, setTableNumber] = useState('');
+  const [tableNumber, setTableNumber] = useState("");
   const [items, setItems] = useState(
-    sampleMenu.map(item => ({ ...item, quantity: 0, notes: '' }))
+    sampleMenu.map((item) => ({ ...item, quantity: 0, notes: "" }))
   );
   const [submitting, setSubmitting] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState("");
 
-    useEffect(() => {
+  useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const tableFromURL = params.get('table');
-    if (tableFromURL) {
-      setTableNumber(tableFromURL);
-    }
+    const tableFromURL = params.get("table");
+    if (tableFromURL) setTableNumber(tableFromURL);
   }, []);
-  // Handle quantity change
+
   const updateQuantity = (id, qty) => {
-    setItems(items.map(item => item.id === id ? { ...item, quantity: qty } : item));
+    setItems(
+      items.map((item) => (item.id === id ? { ...item, quantity: qty } : item))
+    );
   };
 
-  // Handle notes change
   const updateNotes = (id, notes) => {
-    setItems(items.map(item => item.id === id ? { ...item, notes } : item));
+    setItems(items.map((item) => (item.id === id ? { ...item, notes } : item)));
   };
+
+  const totalPrice = items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSuccessMessage('');
-    
+    setSuccessMessage("");
+
     if (!tableNumber.trim()) {
-      alert('Please enter your table number');
+      alert("Please select your table number");
       return;
     }
 
-    // Filter only ordered items with quantity > 0
     const orderedItems = items
-      .filter(item => item.quantity > 0)
-      .map(item => ({
+      .filter((item) => item.quantity > 0)
+      .map((item) => ({
         name: item.name,
         price: item.price,
         quantity: item.quantity,
-        notes: item.notes.trim()
+        notes: item.notes.trim(),
       }));
 
     if (orderedItems.length === 0) {
-      alert('Please select at least one item');
+      alert("Please select at least one item");
       return;
     }
 
@@ -69,15 +72,14 @@ function CustomerOrder() {
     try {
       await axios.post(`${SERVER_URL}/api/orders`, {
         tableNumber,
-        items: orderedItems
+        items: orderedItems,
       });
 
-      setSuccessMessage('Thank you! Your order has been placed.');
-      // Reset form
-      setTableNumber('');
-      setItems(sampleMenu.map(item => ({ ...item, quantity: 0, notes: '' })));
+      setSuccessMessage("Thank you! Your order has been placed.");
+      setTableNumber("");
+      setItems(sampleMenu.map((item) => ({ ...item, quantity: 0, notes: "" })));
     } catch (error) {
-      alert('Failed to place order. Please try again.');
+      alert("Failed to place order. Please try again.");
       console.error(error);
     } finally {
       setSubmitting(false);
@@ -85,51 +87,86 @@ function CustomerOrder() {
   };
 
   return (
-    <div style={{ maxWidth: 500, margin: 'auto', padding: 20 }}>
-      <h2>Place Your Order</h2>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: 12 }}>
-          <label>
-            Table Number: <br />
-            <input
-              type="text"
-              value={tableNumber}
-              onChange={e => setTableNumber(e.target.value)}
-              required
-              placeholder="e.g. T1"
-              style={{ width: '100%', padding: 8 }}
-            />
-          </label>
+    <div className="order-container">
+      <h2 className="title">Place Your Order</h2>
+
+      <form onSubmit={handleSubmit} className="order-form">
+        <div className="input-group">
+          <label className="label">Table Number:</label>
+          <select
+            value={tableNumber}
+            onChange={(e) => setTableNumber(e.target.value)}
+            required
+            className="select-input"
+          >
+            {Array.from({ length: 10 }, (_, i) => (
+              <option key={i} value={`T${i + 1}`}>
+                T{i + 1}
+              </option>
+            ))}
+          </select>
         </div>
 
-        <h3>Menu</h3>
-        {items.map(item => (
-          <div key={item.id} style={{ marginBottom: 10, borderBottom: '1px solid #ddd', paddingBottom: 8 }}>
-            <strong>{item.name} (Rs. {item.price})</strong><br />
-            <img src={item.image} alt={item.name} style={{ width: '30%', height: '50%', borderRadius: 4 }} /><br />
-            Quantity: <input
-              type="number"
-              min="0"
-              value={item.quantity}
-              onChange={e => updateQuantity(item.id, parseInt(e.target.value) || 0)}
-              style={{ width: 60, marginRight: 12 }}
-            />
-            Notes: <input
-              type="text"
-              value={item.notes}
-              onChange={e => updateNotes(item.id, e.target.value)}
-              placeholder="e.g. no chili"
-              style={{ width: '60%' }}
-            />
-          </div>
-        ))}
+        <h1 className="menu-title">Menu</h1>
+        <div className="menu-list">
+          {items.map((item) => (
+            <div key={item.id} className="menu-item">
+              <img src={item.image} alt={item.name} className="menu-img" />
 
-        <button type="submit" disabled={submitting} style={{ marginTop: 20, padding: '10px 20px' }}>
-          {submitting ? 'Submitting...' : 'Submit Order'}
+              <div className="menu-info">
+                <strong className="item-name">{item.name}</strong>
+                <span className="item-price">Rs. {item.price}</span>
+
+                <div className="quantity-box">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      updateQuantity(item.id, Math.max(0, item.quantity - 1))
+                    }
+                    className="qty-btn"
+                  >
+                    -
+                  </button>
+
+                  <input
+                    type="text"
+                    min="0"
+                    value={item.quantity}
+                    onChange={(e) =>
+                      updateQuantity(item.id, parseInt(e.target.value) || 0)
+                    }
+                    className="qty-input"
+                  />
+
+                  <button
+                    type="button"
+                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                    className="qty-btn"
+                  >
+                    +
+                  </button>
+                </div>
+
+                <input
+                  type="text"
+                  value={item.notes}
+                  onChange={(e) => updateNotes(item.id, e.target.value)}
+                  placeholder="e.g. no chili"
+                  className="notes-input"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <h3 className="total">Total Price: Rs. {totalPrice}</h3>
+
+        <button type="submit" disabled={submitting} className="submit-btn">
+          {submitting ? "Submitting..." : "Submit Order"}
         </button>
       </form>
 
-      {successMessage && <p style={{ color: 'green', marginTop: 20 }}>{successMessage}</p>}
+      {successMessage && <p className="success-message">{successMessage}</p>}
     </div>
   );
 }
